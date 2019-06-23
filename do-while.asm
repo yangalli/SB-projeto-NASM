@@ -70,7 +70,7 @@ DO
 	call print_string
 	sub ecx, 1
   cmp ecx,0
-WHILE ne
+WHILE e
 
 popa
 mov	eax, 0
