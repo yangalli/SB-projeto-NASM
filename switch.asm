@@ -1,22 +1,5 @@
 %include "asm_io.inc"
 
-;----------------------------------------------------------------------
-; Switch - Case - Default - EndSwitch
-; Usage:
-;
-;   SWITCH expression
-;     CASE argument1
-;       statements 
-;				BREAK
-;     CASE argumentN
-;       statements 
-;     DEFAULT 
-;       statements
-;   ENDSWITCH
-;
-; nasm -f elf switch.asm
-;----------------------------------------------------------------------
-
 %macro SWITCH 1
 	%push SWITCH                    ; Push context
 	%assign %$case 1                ; Assign 1 to the nextcase index

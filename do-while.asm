@@ -1,19 +1,6 @@
-; macro que simula o comando do-while do C
-; 
 ; nasm -f elf do-while.asm
-;
 
 %include "asm_io.inc"
-
-;----------------------------------------------------------------------
-; Do/While - While/do
-; Usage:
-;
-;   DO 													WHILE CC
-;     statements 									statements
-;		WHILE CC 										DO
-;
-;----------------------------------------------------------------------
 
 %macro DO 0
     %ifctx WHILE
@@ -44,19 +31,12 @@ newline 		db "", 0xa, 0
 
 
 segment .bss
-;
-; uninitialized data is put in the bss segment
-;
 
 segment .text
   global  doWhile
 	doWhile:
 	enter	0,0               ; setup routine
 	pusha
-;
-; code is put in the text segment. Do not modify the code before
-; or after this comment.
-;
 
 mov eax, msg_teste1
 call print_string

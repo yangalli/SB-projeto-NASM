@@ -1,16 +1,6 @@
-; macro que simula o comando while-do do C
 ; nasm -f elf while-do.asm
-%include "asm_io.inc"
 
-;----------------------------------------------------------------------
-; Do/While - While/do
-; Usage:
-;
-;   DO 													WHILE CC
-;     statements 									statements
-;		WHILE CC 										DO
-;
-;----------------------------------------------------------------------
+%include "asm_io.inc"
 
 %macro DO 0
     %ifctx WHILE
@@ -48,10 +38,6 @@ segment .text
 	whileDo:
 	enter	0,0               ; setup routine
 	pusha
-;
-; code is put in the text segment. Do not modify the code before
-; or after this comment.
-;
 
 mov eax, msg_teste1
 call print_string

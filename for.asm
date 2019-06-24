@@ -1,4 +1,5 @@
-; nasm -f elf for.asm    
+; nasm -f elf for.asm 
+
     global  For
     section   .text
 
@@ -35,6 +36,6 @@
 
 For: for 0x8
 
-          section   .data
+        section   .data
 message:  db        "Cafebabe", 10      ; note the newline at the end
 loopmessage:  db        "Hello, Ladeira", 10      ; note the newline at the end
