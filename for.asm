@@ -1,3 +1,4 @@
+; nasm -f elf for.asm    
     global  For
     section   .text
 

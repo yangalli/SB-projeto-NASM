@@ -10,7 +10,7 @@
 
  */
 
-// Para executar: nasm -felf64 main.asm && gcc main.c main.o && ./a.out
+// Para executar: gcc -m32 main.c *.o -o main
 #include <stdio.h>
 
 int Switch();

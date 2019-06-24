@@ -1,6 +1,6 @@
 ; macro que simula o comando do-while do C
 ; 
-; Comando para gerar objeto: nasm -f elf 7-01-do-while.asm   (Para Linux, desenvolvido em Ubuntu 16.04)
+; nasm -f elf do-while.asm
 ;
 
 %include "asm_io.inc"

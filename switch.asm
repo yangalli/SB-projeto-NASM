@@ -14,6 +14,7 @@
 ;       statements
 ;   ENDSWITCH
 ;
+; nasm -f elf switch.asm
 ;----------------------------------------------------------------------
 
 %macro SWITCH 1

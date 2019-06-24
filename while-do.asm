@@ -1,5 +1,5 @@
 ; macro que simula o comando while-do do C
-; 
+; nasm -f elf while-do.asm
 %include "asm_io.inc"
 
 ;----------------------------------------------------------------------
