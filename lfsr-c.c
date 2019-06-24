@@ -5,22 +5,22 @@
 
 #define NUM_CAT 16
 
-//vetor de classes
-int classes[NUM_CAT];
+//vetor de intervalos
+int intervalos[NUM_CAT];
 double chiSquare[NUM_CAT];
-double distChi = 0;
+double distChiSquare = 0;
 
 //declarações de funções
-void inicializaClasses();
+void inicializaIntervalos();
 void inicializaChiSquare();
 void calculaFreq();
-void separaClasses(uint32_t);
+void separaIntervalos(uint32_t);
 void lfsr();
 
 //corpo das funções
-void inicializaClasses(){
+void inicializaIntervalos(){
   for (int i = 0;  i < NUM_CAT; i++) {
-    classes[i] = 0;
+    intervalos[i] = 0;
   }
 }
 
@@ -30,19 +30,19 @@ void inicializaChiSquare() {
   }
 }
 
-void separaClasses(uint32_t a) {
+void separaIntervalos(uint32_t a) {
   uint32_t aux = (a % NUM_CAT);
-  classes[aux]++;
+  intervalos[aux]++;
 }
 
 void calculaFreq(){
   double aux =0;
 
   for (int i = 0;  i < NUM_CAT; i++) {
-    aux = (pow((classes[i] - NUM_CAT), 2)) / NUM_CAT;
+    aux = (pow((intervalos[i] - NUM_CAT), 2)) / NUM_CAT;
     chiSquare[i] = aux;
 
-    distChi += chiSquare[i];
+    distChiSquare += chiSquare[i];
   }
 }
 
@@ -63,7 +63,7 @@ void lfsr(){
     ++period;
     contador++;
     lfsr = lfsr & 0x00FFFFFF;
-    separaClasses(lfsr);
+    separaIntervalos(lfsr);
   } while (contador != 16777215);
 
   printf("\n\n\t %lu Números Gerados\n", contador);
@@ -71,15 +71,15 @@ void lfsr(){
 
 int main(void){
   inicializaChiSquare();
-  inicializaClasses();
+  inicializaIntervalos();
   lfsr();
   calculaFreq();
 
   for (int i = 0; i < NUM_CAT; i++) {
-    printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, classes[i],chiSquare[i]);
+    printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, intervalos[i],chiSquare[i]);
   }
 
-  printf("---- O valor Chi-Square é %lf ----\n", distChi);
+  printf("---- O valor Chi-Square é %lf ----\n", distChiSquare);
 
   exit(1);
 }

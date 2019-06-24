@@ -28,7 +28,7 @@ main:
 		xor eax, ecx
 		shr ecx, 3
 		xor eax, ecx
-		shr ecx, 5
+		shr ecx, 5    ; Fibonacci ...
 		xor eax, ecx
 		shr ecx, 8
 		xor eax, ecx
@@ -39,19 +39,19 @@ main:
 		or eax, ebx
 		mov ebx, eax
 
-		and eax, 0x00FFFFFF
+		and eax, 0x00FFFFFF   ; 24 bits
 
-		; Calculando a classe em que o numero pertence
+		; Calculando o intervalo do número
 		and eax, 0x0FFF
 
-		; incrementa um nesse classe no vetor de frequencias
+		; incrementa um no intervalo (vetor de frequencias)
 		add dword [class + eax*4], 1
 
 		inc edx
 		cmp edx, 40960
 	jne do
 
-	; imprime as frequencias
+	; Mostra os valores -> usando o arquivo do Paul Carter
 	mov ecx, 0
 	results:
 		mov eax, output1
@@ -75,8 +75,7 @@ main:
 	jne results
 
 
-	; fim do programa
-
+	; Finaliza zerando o base e incrementando o acumulador
 	mov ebx, 0
 	mov eax, 1
 	int 0x80
