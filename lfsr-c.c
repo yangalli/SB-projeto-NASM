@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#define NUM_CAT 4096
+
+#define NUM_CAT 16
 
 //vetor de classes
 int classes[NUM_CAT];
@@ -30,7 +31,7 @@ void inicializaChiSquare() {
 }
 
 void separaClasses(uint32_t a) {
-  uint32_t aux = (a/NUM_CAT);
+  uint32_t aux = (a%NUM_CAT);
   classes[aux]++;
 }
 
@@ -75,7 +76,7 @@ int main(void){
   calculaFreq();
 
   for (int i = 0; i < NUM_CAT; i++) {
-    printf("A classe %d possui %d elementos e seu valor Chi-Square é %lf \n", i, classes[i],chiSquare[i]);
+    printf("Intervalo: %d, Elementos: %d, Chi-Square: %lf \n", i, classes[i],chiSquare[i]);
   }
 
   printf("---- O valor Chi-Square é %lf ----\n", distChi);
