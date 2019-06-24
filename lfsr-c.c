@@ -31,7 +31,7 @@ void inicializaChiSquare() {
 }
 
 void separaClasses(uint32_t a) {
-  uint32_t aux = (a%NUM_CAT);
+  uint32_t aux = (a % NUM_CAT);
   classes[aux]++;
 }
 
@@ -39,7 +39,7 @@ void calculaFreq(){
   double aux =0;
 
   for (int i = 0;  i < NUM_CAT; i++) {
-    aux = (pow((classes[i]-NUM_CAT),2))/NUM_CAT;
+    aux = (pow((classes[i] - NUM_CAT), 2)) / NUM_CAT;
     chiSquare[i] = aux;
 
     distChi += chiSquare[i];
@@ -76,7 +76,7 @@ int main(void){
   calculaFreq();
 
   for (int i = 0; i < NUM_CAT; i++) {
-    printf("Intervalo: %d, Elementos: %d, Chi-Square: %lf \n", i, classes[i],chiSquare[i]);
+    printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, classes[i],chiSquare[i]);
   }
 
   printf("---- O valor Chi-Square é %lf ----\n", distChi);
