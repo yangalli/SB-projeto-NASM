@@ -20,7 +20,7 @@ main:
 		; fibonacci lsfr
 		mov ecx, ebx  ; vetor com a frequencia de cada classe
 		mov eax, ebx  ; coloca a seed no acumulador
-		shr ecx, 2    ; shifta o valor de exc em 2 bits
+		shr ecx, 2    ; shifta o valor de ecx em 2 bits
 		xor eax, ecx	; aplica o xor entre o acumulador e o contador de objetos
 		shr ecx, 1		;	shifta o acumulador
 		xor eax, ecx	; aplica novamente xor entre o acumulador e o contador de objetos 

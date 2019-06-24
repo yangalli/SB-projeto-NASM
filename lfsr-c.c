@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#define NN 4096
+#define NUM_CAT 4096
 
-    //vetor de classes
-    int classes[NN];
-double chiSquare[NN];
+//vetor de classes
+int classes[NUM_CAT];
+double chiSquare[NUM_CAT];
 double distChi = 0;
 
 //declarações de funções
@@ -18,27 +18,27 @@ void lfsr();
 
 //corpo das funções
 void inicializaClasses(){
-  for (int i = 0;  i < NN; i++) {
+  for (int i = 0;  i < NUM_CAT; i++) {
     classes[i] = 0;
   }
 }
 
 void inicializaChiSquare() {
-  for (int i = 0;  i < NN; i++) {
+  for (int i = 0;  i < NUM_CAT; i++) {
     chiSquare[i] = 0;
   }
 }
 
 void separaClasses(uint32_t a) {
-  uint32_t aux = (a/NN);
+  uint32_t aux = (a/NUM_CAT);
   classes[aux]++;
 }
 
 void calculaFreq(){
   double aux =0;
 
-  for (int i = 0;  i < NN; i++) {
-    aux = (pow((classes[i]-NN),2))/NN;
+  for (int i = 0;  i < NUM_CAT; i++) {
+    aux = (pow((classes[i]-NUM_CAT),2))/NUM_CAT;
     chiSquare[i] = aux;
 
     distChi += chiSquare[i];
@@ -74,7 +74,7 @@ int main(void){
   lfsr();
   calculaFreq();
 
-  for (int i = 0; i < NN; i++) {
+  for (int i = 0; i < NUM_CAT; i++) {
     printf("A classe %d possui %d elementos e seu valor Chi-Square é %lf \n", i, classes[i],chiSquare[i]);
   }
 
