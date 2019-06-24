@@ -1,10 +1,11 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 #define NN 4096
 
-//vetor de classes
-int classes[NN];
+    //vetor de classes
+    int classes[NN];
 double chiSquare[NN];
 double distChi = 0;
 
@@ -79,6 +80,5 @@ int main(void){
 
   printf("---- O valor Chi-Square é %lf ----\n", distChi);
 
-  getchar();
-  return 0;
+  exit(1);
 }
