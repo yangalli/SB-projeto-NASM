@@ -1,4 +1,4 @@
-    global  _start
+    global  For
     section   .text
 
 %macro write_string 2 
@@ -20,19 +20,19 @@
         cmp edi, %1
         jne innerLoop
     done:
-        mov       rax, 1                  ; system call for write
-        mov       rdi, 1                  ; file handle 1 is stdout
-        mov       rsi, message            ; address of string to output
-        mov       rdx, 9                 ; number of bytes
-        syscall                           ; invoke operating system to do the write
-        mov       rax, 60                 ; system call for exit
-        xor       rdi, rdi                ; exit code 0
-        syscall                           ; invoke operating system to exit
+        mov   eax, 4
+        mov   ebx, 1
+        mov   ecx, message
+        mov   edx, 9
+        int   80h
+        ; finaliza o programa
+        mov eax,1                ;system call number (sys_exit)
+        int 0x80                 ;call kernel                         ; invoke operating system to exit
 
 
 %endmacro
 
-_start: for 0x8
+For: for 0x8
 
           section   .data
 message:  db        "Cafebabe", 10      ; note the newline at the end
