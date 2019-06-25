@@ -11,16 +11,16 @@
     int   80h
 %endmacro
 
-%macro for 3
-    mov edi, 1
+%macro for 4
+    mov edi, %1
     ;mov ecx, %1
     innerLoop:
 
         write_string loopmessage, 15
         ;loop innerLoop
-        add edi, %2
-        cmp edi, %1
-        jle innerLoop
+        add edi, %3
+        cmp edi, %2
+        %4 innerLoop
     done:
         mov   eax, %2
         mov   ebx, 1
@@ -34,7 +34,7 @@
 
 %endmacro
 
-For: for 0x8, 1,0x1
+For: for 0,10,1,jle
 
         section   .data
 message:  db        "Cafebabe", 10      ; note the newline at the end
