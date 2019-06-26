@@ -1,11 +1,12 @@
+// Compilação -> gcc lfsr-c.c -o lfsr -g -lm
+
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 
 #define NUM_INT 16
-
-// Compilação -> gcc lfsr-c.c -o lfsr -g -lm
+#define NUM_OBS 16777215
 
 //vetor de intervalos
 int intervalos[NUM_INT];
@@ -30,7 +31,7 @@ void calculaFreq(){
   double aux =0;
 
   for (int i = 0;  i < NUM_INT; i++) {
-    aux = (pow((intervalos[i] - NUM_INT), 2)) / NUM_INT;
+    aux = ((pow((intervalos[i] - NUM_INT), 2)) / NUM_INT) / NUM_OBS;
     chiSquare[i] = aux;
 
     distChiSquare += chiSquare[i];
@@ -71,14 +72,15 @@ void lfsr(){
     lfsr =  (lfsr >> 1) | (bit << 23);
     ++period;
     contador++;
-    lfsr = lfsr & 0x00FFFFFF;
+    lfsr = lfsr & 0x00FFFFFF; //16777215
     separaIntervalos(lfsr);
-  } while (contador != 16777215);
+  } while (contador != NUM_OBS); //16777215
 
   printf("\n\n\t %lu Números Gerados\n", contador);
 }
 
 int main(void){
+  float porcentagem;
   inicializaChiSquare();
   inicializaIntervalos();
   lfsr();
@@ -89,8 +91,11 @@ int main(void){
     printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, intervalos[i], chiSquare[i]);
   }
 
+  porcentagem = distChiSquare / NUM_OBS;
   // Retorna o valor total do chi-quadrado
   printf("---- O valor Chi-Square é %lf ----\n", distChiSquare);
+
+  printf("---- Porcentagem em relação a 16777215: %f ----\n", porcentagem);
 
   exit(1);
 }
