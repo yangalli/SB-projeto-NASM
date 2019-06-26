@@ -1,5 +1,5 @@
 %include "macros-lfsr.inc"
-%define NN 4096 ; numero de classes
+%define NN 16 ; numero de classes
 
 SECTION .data
 	output1 db "classe ", 0
