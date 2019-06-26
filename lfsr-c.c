@@ -31,7 +31,7 @@ void calculaFreq(){
   double aux =0;
 
   for (int i = 0;  i < NUM_INT; i++) {
-    aux = ((pow((intervalos[i] - NUM_INT), 2)) / NUM_INT) / NUM_OBS;
+    aux = ((pow((intervalos[i] - NUM_INT), 2)) / NUM_INT) / sqrt(NUM_OBS);
     chiSquare[i] = aux;
 
     distChiSquare += chiSquare[i];
