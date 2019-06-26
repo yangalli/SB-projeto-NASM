@@ -21,9 +21,12 @@ SECTION .bss
 	class resd NN ; vetor com a frequencia de cada intervalo
 
 SECTION .text
-global main
-main:
+global lfsr_main
+lfsr_main:
+	enter 0,0 		; setup routine
+	pusha
 
+	; Começo do código assembly
 	mov ebx, seed ; coloca a seed no base
 	mov edx, 0		; zera a extensão do acumulador
 	
@@ -90,3 +93,8 @@ main:
 	mov ebx, 0
 	mov eax, 1
 	int 0x80
+
+	popa
+	mov eax, 0 	; retorne para o programa C
+	leave
+	ret

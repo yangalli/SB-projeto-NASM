@@ -14,6 +14,7 @@ double chiSquare[NUM_INT];
 double distChiSquare = 0;
 
 //declarações de funções
+//int lfsr_main();
 void separaIntervalos(uint32_t);
 void calculaFreq();
 void inicializaChiSquare();
@@ -31,7 +32,7 @@ void calculaFreq(){
   double aux =0;
 
   for (int i = 0;  i < NUM_INT; i++) {
-    aux = ((pow((intervalos[i] - NUM_INT), 2)) / NUM_INT) / sqrt(NUM_OBS);
+    aux = ((pow((intervalos[i] - NUM_INT), 2)) / NUM_INT) / pow(NUM_OBS, 2);
     chiSquare[i] = aux;
 
     distChiSquare += chiSquare[i];
@@ -83,6 +84,7 @@ int main(void){
   float porcentagem;
   inicializaChiSquare();
   inicializaIntervalos();
+  //lfsr_main();
   lfsr();
   calculaFreq();
 
@@ -94,8 +96,6 @@ int main(void){
   porcentagem = distChiSquare / NUM_OBS;
   // Retorna o valor total do chi-quadrado
   printf("---- O valor Chi-Square é %lf ----\n", distChiSquare);
-
-  printf("---- Porcentagem em relação a 16777215: %f ----\n", porcentagem);
 
   exit(1);
 }
