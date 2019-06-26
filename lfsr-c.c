@@ -93,7 +93,6 @@ int main(void){
     printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, intervalos[i], chiSquare[i]);
   }
 
-  porcentagem = distChiSquare / NUM_OBS;
   // Retorna o valor total do chi-quadrado
   printf("---- O valor Chi-Square é %lf ----\n", distChiSquare);
 
