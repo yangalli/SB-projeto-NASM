@@ -3,39 +3,25 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define NUM_CAT 16
+#define NUM_INT 16
+
+// Compilação -> gcc lfsr-c.c -o lfsr -g -lm
 
 //vetor de intervalos
-int intervalos[NUM_CAT];
-double chiSquare[NUM_CAT];
+int intervalos[NUM_INT];
+double chiSquare[NUM_INT];
 double distChiSquare = 0;
 
 //declarações de funções
-void inicializaIntervalos();
-void inicializaChiSquare();
-void calculaFreq();
 void separaIntervalos(uint32_t);
+void calculaFreq();
+void inicializaChiSquare();
+void inicializaIntervalos();
 void lfsr();
-
-// Incialmente Zera os valores chi-quadrado para cada intervalo
-void inicializaChiSquare() {
-  for (int i = 0;  i < NUM_CAT; i++) {
-    chiSquare[i] = 0;
-  }
-}
-
-// Incialmente Zera todos os intervalos
-void inicializaIntervalos()
-{
-  for (int i = 0; i < NUM_CAT; i++)
-  {
-    intervalos[i] = 0;
-  }
-}
 
 // Pega o estado inicial e faz o módulo pelo número de intervalos 
 void separaIntervalos(uint32_t a) {
-  uint32_t aux = (a % NUM_CAT);
+  uint32_t aux = (a % NUM_INT);
   intervalos[aux]++;
 }
 
@@ -43,28 +29,45 @@ void separaIntervalos(uint32_t a) {
 void calculaFreq(){
   double aux =0;
 
-  for (int i = 0;  i < NUM_CAT; i++) {
-    aux = (pow((intervalos[i] - NUM_CAT), 2)) / NUM_CAT;
+  for (int i = 0;  i < NUM_INT; i++) {
+    aux = (pow((intervalos[i] - NUM_INT), 2)) / NUM_INT;
     chiSquare[i] = aux;
 
     distChiSquare += chiSquare[i];
   }
 }
 
+// Incialmente Zera os valores chi-quadrado para cada intervalo
+void inicializaChiSquare()
+{
+  for (int i = 0; i < NUM_INT; i++)
+  {
+    chiSquare[i] = 0;
+  }
+}
+
+// Incialmente Zera todos os intervalos
+void inicializaIntervalos()
+{
+  for (int i = 0; i < NUM_INT; i++)
+  {
+    intervalos[i] = 0;
+  }
+}
 
 void lfsr(){
   uint32_t start_state = 0x0001;  /* Estado inicial != 0 */
   uint32_t lfsr = start_state;
-  uint32_t bit;                    /* 16 bits */
+  uint32_t bit;                    /* Começa com 32 Bits -> irá para 24 bits (shift 8) */
   unsigned period = 0;
 
   unsigned long int contador = 0;
 
   do
   {
-    // Fibonacci
-    /* o feedback polinomial será dado por: x^16 + x^14 + x^13 + x^11 + 1 */
-    bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ^ (lfsr >> 8) ^(lfsr >> 13) ^(lfsr >> 21)) & 1;
+    // Fibonacci -> 24 + 23 + 22 + 17 + 1
+    /* o feedback polinomial será dado por: x^24 + x^23 + x^22 + x^17 + 1 */
+    bit = ((lfsr >> 0) ^ (lfsr >> 1) ^ (lfsr >> 2) ^ (lfsr >> 5) ^ (lfsr >> 8)) & 1;
     lfsr =  (lfsr >> 1) | (bit << 23);
     ++period;
     contador++;
@@ -82,8 +85,8 @@ int main(void){
   calculaFreq();
 
   // Printa os intervalos, suas frequências e o valor chi-square do intervalo
-  for (int i = 0; i < NUM_CAT; i++) {
-    printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, intervalos[i],chiSquare[i]);
+  for (int i = 0; i < NUM_INT; i++) {
+    printf("Intervalo: %d, Frequência: %d, Frequência Esperada: 1048576 Chi-Square: %lf \n", i, intervalos[i], chiSquare[i]);
   }
 
   // Retorna o valor total do chi-quadrado

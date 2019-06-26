@@ -1,4 +1,4 @@
-; Arquivos Paul Carter
+; Arquivos Paul Carter -> códigos das rotinas em C para uso em asm
 
 %define NL 10
 %define CF_MASK 00000001h
